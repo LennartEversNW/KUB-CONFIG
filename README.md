@@ -1,0 +1,2 @@
+# KUBERNETES-CONFIG
+Kubernetes Konfigurationen
