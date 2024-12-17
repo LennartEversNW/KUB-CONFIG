@@ -1,19 +1,18 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/teutonet/teutonet-helm-charts/main/charts/base-cluster/helmrelease.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: base-cluster
-  namespace: flux-system
+  name: dagster-main
+  namespace: dagster
 spec:
   chart:
     spec:
-      chart: base-cluster
+      chart: dagster
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: teuto-net
+        name: nw-dagster
         namespace: flux-system
-      version: 6.x.x
+      version: 1.x.x
   interval: 1m0s
   values:
     flux:
@@ -22,12 +21,7 @@ spec:
           url: ssh://git@github.com/LennartEversNW/KUB-CONFIG
           branch: main
           path: ./clusters/{{ .Values.global.clusterName }}
-    global:
-      helmRepositories:
-        nw-dagster:
-          url: https://github.com/LennartEversNW/KUBERNETES-HELMCHARTS
-          type: git
+    global: {}
     monitoring:
       kdave:
         enabled: false
-
